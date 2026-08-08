@@ -8,42 +8,32 @@ import { GalleryThumbnailsIcon } from "@/components/ui/gallery-thumbnails";
 import { LayersIcon } from "@/components/ui/layers";
 import { MonitorCogIcon } from "@/components/ui/monitor-cog";
 import { RocketIcon } from "@/components/ui/rocket";
+import { websiteTypes } from "@/lib/website-types";
 
-const websiteTypes = [
-  { title: "เว็บไซต์องค์กร", detail: "สื่อสารตัวตนและสร้างความน่าเชื่อถือให้แบรนด์", Icon: BriefcaseBusinessIcon },
-  { title: "แลนดิ้งเพจ", detail: "นำเสนอแคมเปญหรือบริการให้เกิดผลลัพธ์ชัดเจน", Icon: RocketIcon },
-  { title: "ร้านค้าออนไลน์", detail: "ประสบการณ์ซื้อขายที่เรียบง่ายและน่าใช้งาน", Icon: CartIcon },
-  { title: "เว็บแอปพลิเคชัน", detail: "ระบบที่ช่วยให้ทีมและลูกค้าทำงานได้ดีขึ้น", Icon: MonitorCogIcon },
-  { title: "แพลตฟอร์มดิจิทัล", detail: "แพลตฟอร์มที่พร้อมรองรับการเติบโตของธุรกิจ", Icon: LayersIcon },
-  { title: "พอร์ตโฟลิโอ", detail: "พื้นที่เล่าเรื่องผลงานอย่างมีเอกลักษณ์", Icon: GalleryThumbnailsIcon },
-] as const;
+const icons = [BriefcaseBusinessIcon, RocketIcon, CartIcon, MonitorCogIcon, LayersIcon, GalleryThumbnailsIcon] as const;
 
-type IconController = {
-  startAnimation: () => void;
-  stopAnimation: () => void;
-};
+type IconController = { startAnimation: () => void; stopAnimation: () => void };
 
-function WebsiteTypeCard({ item }: { item: (typeof websiteTypes)[number] }) {
+function WebsiteTypeCard({ index }: { index: number }) {
   const iconRef = useRef<IconController>(null);
-  const Icon = item.Icon;
+  const item = websiteTypes[index];
+  const Icon = icons[index];
 
   return (
     <div className="ios-window-cell">
       <a
         className="ios-window"
-        href="#contact"
+        href={`/website-types/${item.slug}`}
+        draggable={false}
+        onDragStart={(event) => event.preventDefault()}
         onMouseEnter={() => iconRef.current?.startAnimation()}
         onMouseLeave={() => iconRef.current?.stopAnimation()}
       >
-        <div className="ios-window-bar" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
+        <div className="ios-window-bar" aria-hidden="true"><span /><span /><span /></div>
         <div className="ios-window-content">
-          <Icon ref={iconRef as never} aria-hidden="true" className="ios-window-icon" size={112} />
+          <Icon ref={iconRef as never} aria-hidden="true" className="ios-window-icon" size={112} draggable={false} />
           <h3>{item.title}</h3>
-          <span>{item.detail}</span>
+          <span>{item.description}</span>
           <span className="ios-window-detail">ดูรายละเอียด</span>
         </div>
       </a>
@@ -54,15 +44,13 @@ function WebsiteTypeCard({ item }: { item: (typeof websiteTypes)[number] }) {
 export function WebsiteTypesSection() {
   return (
     <section className="website-types-section" aria-labelledby="website-types-title">
-      <h2 id="website-types-title" className="text-4xl text-white tracking-tighter text-balance">
-        คุณต้องการเว็บแบบไหน?
-      </h2>
+      <h2 id="website-types-title" className="text-4xl text-white tracking-tighter text-balance">คุณต้องการเว็บแบบไหน?</h2>
       <small className="website-types-side-label">WEBSITE TYPES</small>
       <p className="website-types-description text-base text-white">
         ไม่ว่าจะเป็นเว็บไซต์องค์กร ร้านค้าออนไลน์ หรือแพลตฟอร์มดิจิทัล เราช่วยออกแบบและพัฒนาให้ตอบโจทย์ธุรกิจของคุณอย่างชัดเจน
       </p>
       <div className="website-types-grid">
-        {websiteTypes.map((item) => <WebsiteTypeCard item={item} key={item.title} />)}
+        {websiteTypes.map((item, index) => <WebsiteTypeCard index={index} key={item.slug} />)}
         <span className="website-types-grid-divider" aria-hidden="true" />
       </div>
     </section>

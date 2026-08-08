@@ -43,7 +43,7 @@ export function ServicesSection() {
       <div className="service-grid">
         {services.map(([_symbol, title, copy], index) => (
           <article key={title}>
-            <i><img alt="" src={serviceIcons[index]} /></i>
+            <i><img alt="" src={serviceIcons[index]} draggable={false} /></i>
             <h3>{title}</h3>
             <p>{copy}</p>
           </article>

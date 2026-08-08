@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function ContactSection() {
   return (
     <section id="approach" className="content-section work-section contact-section">
@@ -11,8 +13,18 @@ export function ContactSection() {
         มาสร้างประสบการณ์ดิจิทัลที่ใช้งานง่าย สื่อสารตัวตนของแบรนด์ และทำให้ผู้คนอยากกลับมาใช้งานไปด้วยกัน
       </p>
       <div id="contact" className="contact-panel">
-        <div>
+        <div className="contact-actions">
           <a href="mailto:hello@wieldtech.dev">เริ่มโปรเจกต์</a>
+          <span aria-hidden="true">หรือ</span>
+          <a
+            className="fastwork-link"
+            href="https://fastwork.co/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image src="/brand/fastwork.svg" alt="" width={28} height={28} />
+            เริ่มคุยงานบน Fastwork
+          </a>
         </div>
       </div>
     </section>

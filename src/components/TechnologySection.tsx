@@ -68,7 +68,7 @@ export function TechnologySection() {
           return (
           <article key={name}>
             <h3>{name}</h3>
-            {icon ? <img className="technology-icon" src={icon} alt="" aria-hidden="true" /> : null}
+            {icon ? <img className="technology-icon" src={icon} alt="" aria-hidden="true" draggable={false} /> : null}
           </article>
           );
         })}

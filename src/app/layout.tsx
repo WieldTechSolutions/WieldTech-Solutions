@@ -3,6 +3,9 @@ import "@fontsource-variable/inter";
 import "@fontsource/kanit/400.css";
 import "@fontsource/kanit/500.css";
 import "@fontsource/kanit/700.css";
+
+import { Footer } from "@/components/Footer";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -49,7 +52,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="th" className="h-full">
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
