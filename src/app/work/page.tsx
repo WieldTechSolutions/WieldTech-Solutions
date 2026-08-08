@@ -6,8 +6,16 @@ import { projects } from "@/components/OurWorkSection";
 import { WorkPortfolioGrid } from "@/components/WorkPortfolioGrid";
 
 export const metadata: Metadata = {
-  title: "ผลงานของเรา",
-  description: "รวมผลงานการออกแบบและพัฒนาเว็บไซต์ของ WieldTech",
+  title: "ผลงานออกแบบเว็บไซต์และเว็บแอปพลิเคชัน",
+  description:
+    "รวมผลงานออกแบบ UX/UI และพัฒนาเว็บไซต์ ร้านค้าออนไลน์ เว็บแอปพลิเคชัน และแพลตฟอร์มดิจิทัลของ WieldTech",
+  alternates: { canonical: "/work" },
+  openGraph: {
+    url: "/work",
+    title: "WieldTech - ผลงานออกแบบเว็บไซต์และเว็บแอปพลิเคชัน",
+    description:
+      "สำรวจผลงานดิจิทัลที่เปลี่ยนโจทย์ธุรกิจให้เป็นเว็บไซต์และระบบที่ใช้งานได้จริง",
+  },
 };
 
 export default function WorkPage() {

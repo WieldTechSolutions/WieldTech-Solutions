@@ -1,3 +1,5 @@
+import { projects as portfolioProjects } from "@/components/OurWorkSection";
+
 const projects = [
   {
     title: "แพลตฟอร์มการลงทุน",
@@ -32,9 +34,26 @@ const projects = [
 ];
 
 export function WorkSection() {
-  const projectRows = [projects.slice(0, 3), projects.slice(3)];
+  const featuredProjects = [
+    portfolioProjects[4],
+    portfolioProjects[1],
+    portfolioProjects[8],
+    portfolioProjects[3],
+    portfolioProjects[6],
+    portfolioProjects[10],
+    portfolioProjects[0],
+    portfolioProjects[5],
+    portfolioProjects[9],
+    portfolioProjects[2],
+    portfolioProjects[7],
+    portfolioProjects[11],
+  ];
+  const projectRows = [featuredProjects.slice(0, 6), featuredProjects.slice(6, 12)];
 
-  const renderRow = (row: typeof projects, isDuplicate = false) => (
+  const renderRow = (
+    row: ReadonlyArray<{ title: string; copy: string; image: string }>,
+    isDuplicate = false,
+  ) => (
     <div className="website-types-grid work-ios-grid work-ios-grid--sliding" aria-hidden={isDuplicate || undefined}>
       {row.map(({ title, copy, image }) => (
         <div className="ios-window-cell" key={title}>
@@ -45,9 +64,17 @@ export function WorkSection() {
               <span />
             </div>
             <div className="ios-window-content">
-              <h3>{title}</h3>
-              <div className="work-card-media">
-                <img alt={isDuplicate ? "" : `ตัวอย่างหน้าเว็บไซต์ ${title}`} src={image} />
+              <div className="work-card-heading">
+                <h3>{title}</h3>
+              </div>
+              <div className="work-card-media-frame">
+                <span className="work-card-bookmark" aria-label="แนะนำ">
+                  <span className="work-card-bookmark-shape" aria-hidden="true" />
+                  <span className="work-card-bookmark-star" aria-hidden="true" />
+                </span>
+                <div className="work-card-media">
+                  <img alt={isDuplicate ? "" : `ตัวอย่างหน้าเว็บไซต์ ${title}`} src={image} />
+                </div>
               </div>
               <span>{copy}</span>
               <span className="ios-window-detail">ดูรายละเอียด</span>
@@ -73,8 +100,19 @@ export function WorkSection() {
         {projectRows.map((row, index) => (
           <div className={`featured-work-slider-row featured-work-slider-row-${index + 1}`} key={index}>
             <div className="featured-work-slider-track">
-              {renderRow(row)}
-              {renderRow(row, true)}
+              {index === 0 ? (
+                <>
+                  {renderRow(row.slice(0, 3))}
+                  {renderRow(row.slice(3, 6))}
+                  {renderRow(row.slice(0, 3), true)}
+                </>
+              ) : (
+                <>
+                  {renderRow(row.slice(3, 6))}
+                  {renderRow(row.slice(0, 3))}
+                  {renderRow(row.slice(3, 6), true)}
+                </>
+              )}
             </div>
           </div>
         ))}

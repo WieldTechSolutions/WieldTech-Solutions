@@ -2,7 +2,8 @@
 
 import { useMemo, useRef, useState } from "react";
 
-import { SparklesIcon, type SparklesIconHandle } from "@/components/ui/sparkles";
+import { ChevronLeftIcon, type ChevronLeftIconHandle } from "@/components/ui/chevron-left";
+import { ChevronRightIcon, type ChevronRightIconHandle } from "@/components/ui/chevron-right";
 
 type Project = {
   title: string;
@@ -17,6 +18,8 @@ type ProjectMeta = {
 };
 
 const PROJECTS_PER_PAGE = 12;
+const PORTFOLIO_PAGE_COUNT = 11;
+const MAX_VISIBLE_PAGE_BUTTONS = 6;
 
 const projectMeta: ProjectMeta[] = [
   { category: "เว็บไซต์องค์กร", tag: "แบรนด์", technology: "Next.js" },
@@ -33,13 +36,28 @@ const technologies = ["ทั้งหมด", "Next.js", "React", "TypeScript",
 
 export function WorkPortfolioGrid({ projects }: { projects: readonly Project[] }) {
   const [page, setPage] = useState(1);
+  const previousPageIcon = useRef<ChevronLeftIconHandle>(null);
+  const nextPageIcon = useRef<ChevronRightIconHandle>(null);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("ทั้งหมด");
   const [tag, setTag] = useState("ทั้งหมด");
   const [technology, setTechnology] = useState("ทั้งหมด");
 
+  const portfolioProjects = useMemo(
+    () => Array.from({ length: PORTFOLIO_PAGE_COUNT }, (_, collectionIndex) =>
+      projects.map((project, projectIndex) => {
+        const itemNumber = collectionIndex * projects.length + projectIndex + 1;
+
+        return collectionIndex === 0
+          ? project
+          : { ...project, title: `${project.title} — โครงการ ${itemNumber}` };
+      }),
+    ).flat(),
+    [projects],
+  );
+
   const projectMatches = useMemo(
-    () => projects.map((project, index) => {
+    () => portfolioProjects.map((project, index) => {
       const meta = projectMeta[index % projectMeta.length];
       const normalizedQuery = query.trim().toLocaleLowerCase("th-TH");
       const matchesQuery = !normalizedQuery || `${project.title} ${project.copy} ${meta.category} ${meta.tag} ${meta.technology}`
@@ -51,13 +69,20 @@ export function WorkPortfolioGrid({ projects }: { projects: readonly Project[] }
         && (tag === "ทั้งหมด" || meta.tag === tag)
         && (technology === "ทั้งหมด" || meta.technology === technology);
     }),
-    [category, projects, query, tag, technology],
+    [category, portfolioProjects, query, tag, technology],
   );
-  const visibleProjects = projects.filter((_, index) => projectMatches[index]);
+  const visibleProjects = portfolioProjects.filter((_, index) => projectMatches[index]);
   const matchingProjectCount = visibleProjects.length;
   const totalPages = Math.max(1, Math.ceil(matchingProjectCount / PROJECTS_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
   const paginatedProjects = visibleProjects.slice((currentPage - 1) * PROJECTS_PER_PAGE, currentPage * PROJECTS_PER_PAGE);
+  const firstVisiblePage = totalPages <= MAX_VISIBLE_PAGE_BUTTONS
+    ? 1
+    : Math.min(Math.max(currentPage - MAX_VISIBLE_PAGE_BUTTONS + 1, 1), totalPages - MAX_VISIBLE_PAGE_BUTTONS + 1);
+  const visiblePageNumbers = Array.from(
+    { length: Math.min(MAX_VISIBLE_PAGE_BUTTONS, totalPages) },
+    (_, index) => firstVisiblePage + index,
+  );
 
   const clearSearch = () => {
     setQuery("");
@@ -108,14 +133,29 @@ export function WorkPortfolioGrid({ projects }: { projects: readonly Project[] }
       </form>
 
       <div className={`website-types-grid work-ios-grid work-portfolio-grid${matchingProjectCount <= 3 ? " work-ios-grid--single-row" : ""}`}>
-        {paginatedProjects.map((project) => <WorkProjectCard key={project.title} project={project} />)}
+        {paginatedProjects.map((project) => (
+          <WorkProjectCard key={project.title} project={project} showBookmark={currentPage === 1} />
+        ))}
         {matchingProjectCount === 0 ? <p className="work-search-empty">ไม่พบผลงานที่ตรงกับเงื่อนไขที่เลือก</p> : null}
         {paginatedProjects.length > 3 ? <span className="website-types-grid-divider" aria-hidden="true" /> : null}
       </div>
       {totalPages > 1 ? (
         <nav className="work-pagination" aria-label="Project pages">
           <span className="work-pagination-controls">
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+            {totalPages > 6 ? (
+              <button
+                aria-label="หน้าก่อนหน้า"
+                className="work-pagination-arrow"
+                disabled={currentPage === 1}
+                onClick={() => selectPage(currentPage - 1)}
+                onMouseEnter={() => previousPageIcon.current?.startAnimation()}
+                onMouseLeave={() => previousPageIcon.current?.stopAnimation()}
+                type="button"
+              >
+                <ChevronLeftIcon ref={previousPageIcon} size={20} />
+              </button>
+            ) : null}
+            {visiblePageNumbers.map((pageNumber) => (
               <button
                 aria-current={pageNumber === currentPage ? "page" : undefined}
                 className={pageNumber === currentPage ? "is-active" : undefined}
@@ -126,6 +166,19 @@ export function WorkPortfolioGrid({ projects }: { projects: readonly Project[] }
                 {pageNumber}
               </button>
             ))}
+            {totalPages > 6 ? (
+              <button
+                aria-label="หน้าถัดไป"
+                className="work-pagination-arrow"
+                disabled={currentPage === totalPages}
+                onClick={() => selectPage(currentPage + 1)}
+                onMouseEnter={() => nextPageIcon.current?.startAnimation()}
+                onMouseLeave={() => nextPageIcon.current?.stopAnimation()}
+                type="button"
+              >
+                <ChevronRightIcon ref={nextPageIcon} size={20} />
+              </button>
+            ) : null}
           </span>
         </nav>
       ) : null}
@@ -141,24 +194,29 @@ function ChevronDown() {
   );
 }
 
-function WorkProjectCard({ project }: { project: Project }) {
-  const sparklesRef = useRef<SparklesIconHandle>(null);
-
+function WorkProjectCard({ project, showBookmark }: { project: Project; showBookmark: boolean }) {
   return (
     <div className="ios-window-cell">
       <a
         className="ios-window"
         href="/consult"
-        onMouseEnter={() => sparklesRef.current?.startAnimation()}
-        onMouseLeave={() => sparklesRef.current?.stopAnimation()}
       >
         <div className="ios-window-bar" aria-hidden="true"><span /><span /><span /></div>
         <div className="ios-window-content">
           <div className="work-card-heading">
             <h3>{project.title}</h3>
-            <span className="work-card-badge"><SparklesIcon ref={sparklesRef} className="work-card-sparkles" size={17} />แนะนำ</span>
           </div>
-          <div className="work-card-media"><img alt={`ตัวอย่างหน้าเว็บไซต์ ${project.title}`} src={project.image} draggable={false} /></div>
+          <div className="work-card-media-frame">
+            {showBookmark ? (
+              <span className="work-card-bookmark" aria-label="แนะนำ">
+                <span className="work-card-bookmark-shape" aria-hidden="true" />
+                <span className="work-card-bookmark-star" aria-hidden="true" />
+              </span>
+            ) : null}
+            <div className="work-card-media">
+              <img alt={`ตัวอย่างหน้าเว็บไซต์ ${project.title}`} src={project.image} draggable={false} />
+            </div>
+          </div>
           <span>{project.copy}</span>
           <span className="ios-window-detail">ดูรายละเอียด</span>
         </div>

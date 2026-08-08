@@ -4,8 +4,16 @@ import { Header } from "@/components/Header";
 import { ContactSection } from "@/components/ContactSection";
 
 export const metadata: Metadata = {
-  title: "เกี่ยวกับเรา",
-  description: "WieldTech คือสตูดิโอดิจิทัลที่ออกแบบและพัฒนาเว็บไซต์ที่มีความหมาย",
+  title: "เกี่ยวกับเรา | ทีมออกแบบและพัฒนาเว็บไซต์",
+  description:
+    "รู้จัก WieldTech ทีมออกแบบ UX/UI และพัฒนาเว็บไซต์ ระบบเว็บแอปพลิเคชัน และผลิตภัณฑ์ดิจิทัลสำหรับธุรกิจที่ต้องการเติบโตอย่างยั่งยืน",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    url: "/about",
+    title: "WieldTech - เกี่ยวกับเรา | ทีมออกแบบและพัฒนาเว็บไซต์",
+    description:
+      "ทีมดิจิทัลที่ผสานกลยุทธ์ การออกแบบ และเทคโนโลยี เพื่อสร้างเว็บไซต์และผลิตภัณฑ์ที่ใช้งานได้จริง",
+  },
 };
 
 export default function AboutPage() {

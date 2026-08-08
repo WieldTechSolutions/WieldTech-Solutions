@@ -4,9 +4,16 @@ import { Header } from "@/components/Header";
 import { ContactSection } from "@/components/ContactSection";
 
 export const metadata: Metadata = {
-  title: "แนวทางทำงาน",
+  title: "แนวทางทำงาน | ออกแบบและพัฒนาเว็บไซต์",
   description:
-    "แนวทางการทำงานของ WieldTech ตั้งแต่ทำความเข้าใจธุรกิจ ออกแบบ ไปจนถึงพัฒนาและส่งมอบเว็บไซต์",
+    "ขั้นตอนทำงานของ WieldTech ตั้งแต่เข้าใจเป้าหมายธุรกิจ วางกลยุทธ์ ออกแบบ UX/UI พัฒนา ทดสอบ และส่งมอบเว็บไซต์หรือระบบเว็บแอปพลิเคชัน",
+  alternates: { canonical: "/approach" },
+  openGraph: {
+    url: "/approach",
+    title: "WieldTech - แนวทางทำงาน | ออกแบบและพัฒนาเว็บไซต์",
+    description:
+      "กระบวนการออกแบบและพัฒนาเว็บไซต์ที่ชัดเจน ยืดหยุ่น และมุ่งสู่ผลลัพธ์ทางธุรกิจ",
+  },
 };
 
 const steps = [

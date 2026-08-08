@@ -14,6 +14,7 @@ const navigationLinks = [
 
 export function Footer() {
   const pathname = usePathname();
+  const currentYear = new Date().getFullYear();
 
   function scrollToSection(event: MouseEvent<HTMLAnchorElement>, targetId: string) {
     event.preventDefault();
@@ -59,7 +60,7 @@ export function Footer() {
         <p><a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a><br /><a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><br /><a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a></p>
       </div>
       <small>
-        <span>© 2024 WieldTech. สงวนลิขสิทธิ์</span>
+        <span>© {currentYear} WieldTech. สงวนลิขสิทธิ์</span>
         <Image className="footer-line-mark" src="/brand/wieldtech-line.png" alt="WieldTech" width={720} height={180} unoptimized />
         <span className="recaptcha-notice">
           หน้านี้ใช้ reCAPTCHA v3 และอยู่ภายใต้ <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">นโยบายความเป็นส่วนตัว</a> และ <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">ข้อกำหนดของ Google</a>

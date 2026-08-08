@@ -15,7 +15,7 @@ export function TrustedOrganizationsSection() {
       <div className="trusted-organizations-grid" aria-label="พื้นที่แสดงโลโก้องค์กร">
         {organizationSlots.map((slot) => (
           <div className="trusted-organization" key={slot}>
-            <Image alt="WieldTech" src="/brand/wieldtech-navbar.png" width={180} height={48} draggable={false} />
+            <Image alt="WieldTech" src="/brand/trusted-organization-logo.png" width={180} height={48} draggable={false} />
           </div>
         ))}
       </div>

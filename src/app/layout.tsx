@@ -11,18 +11,22 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://wieldtech.dev"),
   title: {
-    default: "WieldTech | Digital Experiences",
-    template: "%s | WieldTech",
+    default: "WieldTech - รับทำเว็บไซต์และระบบเว็บแอปพลิเคชัน",
+    template: "WieldTech - %s",
   },
   description:
-    "WieldTech designs and builds thoughtful web experiences, from strategy and UX/UI design to high-performance web development.",
+    "WieldTech รับออกแบบและพัฒนาเว็บไซต์องค์กร ร้านค้าออนไลน์ ระบบเว็บแอปพลิเคชัน และแพลตฟอร์มดิจิทัล ที่ใช้งานง่าย รองรับการเติบโตของธุรกิจ",
   keywords: [
-    "web development",
-    "UX/UI design",
-    "digital agency",
-    "Thailand",
-    "Phuket",
-    "website design",
+    "รับทำเว็บไซต์",
+    "รับทำเว็บแอปพลิเคชัน",
+    "พัฒนาระบบเว็บ",
+    "ออกแบบเว็บไซต์",
+    "ออกแบบ UX/UI",
+    "เว็บไซต์องค์กร",
+    "ร้านค้าออนไลน์",
+    "ดิจิทัลเอเจนซี",
+    "ประเทศไทย",
+    "สุพรรณบุรี",
     "WieldTech",
   ],
   authors: [{ name: "WieldTech" }],
@@ -38,13 +42,15 @@ export const metadata: Metadata = {
     locale: "th_TH",
     url: "/",
     siteName: "WieldTech",
-    title: "WieldTech | Digital Experiences",
-    description: "We design and build thoughtful web experiences.",
+    title: "WieldTech - รับทำเว็บไซต์และระบบเว็บแอปพลิเคชัน",
+    description:
+      "รับออกแบบและพัฒนาเว็บไซต์องค์กร ร้านค้าออนไลน์ ระบบเว็บแอปพลิเคชัน และแพลตฟอร์มดิจิทัลที่พร้อมเติบโตไปกับธุรกิจ",
   },
   twitter: {
     card: "summary_large_image",
-    title: "WieldTech | Digital Experiences",
-    description: "We design and build thoughtful web experiences.",
+    title: "WieldTech - รับทำเว็บไซต์และระบบเว็บแอปพลิเคชัน",
+    description:
+      "รับออกแบบและพัฒนาเว็บไซต์องค์กร ร้านค้าออนไลน์ ระบบเว็บแอปพลิเคชัน และแพลตฟอร์มดิจิทัลที่พร้อมเติบโตไปกับธุรกิจ",
   },
   robots: { index: true, follow: true },
 };

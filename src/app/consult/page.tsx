@@ -4,8 +4,16 @@ import { ConsultationForm } from "@/components/ConsultationForm";
 import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "ปรึกษาโปรเจกต์",
-  description: "ส่งรายละเอียดโปรเจกต์เพื่อปรึกษากับ WieldTech",
+  title: "ปรึกษาโปรเจกต์เว็บไซต์และเว็บแอปพลิเคชัน",
+  description:
+    "เริ่มต้นปรึกษาโปรเจกต์เว็บไซต์ ร้านค้าออนไลน์ ระบบเว็บแอปพลิเคชัน หรือแพลตฟอร์มดิจิทัลกับทีม WieldTech",
+  alternates: { canonical: "/consult" },
+  openGraph: {
+    url: "/consult",
+    title: "WieldTech - ปรึกษาโปรเจกต์เว็บไซต์และเว็บแอปพลิเคชัน",
+    description:
+      "บอกเป้าหมายของธุรกิจ แล้วให้ WieldTech ช่วยวางทิศทางเว็บไซต์หรือระบบดิจิทัลที่เหมาะกับคุณ",
+  },
 };
 
 export default function ConsultPage() {

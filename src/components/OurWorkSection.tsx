@@ -30,43 +30,38 @@ export const projects = [
     image: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/22e949168231879.6436d91bd2c5a.jpeg",
   },
   {
-    title: "Learning Platform",
-    copy: "An online learning space that organizes content and growth paths into a clear, approachable experience.",
+    title: "แพลตฟอร์มการเรียนรู้",
+    copy: "พื้นที่การเรียนรู้ออนไลน์ที่จัดเนื้อหาและเส้นทางพัฒนาทักษะให้ชัดเจน เข้าถึงง่าย และเติบโตได้ตามเป้าหมาย",
     image: "https://cdn.dribbble.com/userupload/3343075/file/original-628a33369f7bad395b08c5a1b4b30979.png?resize=1200x&vertical=center",
   },
   {
-    title: "Modern Lifestyle Brand",
-    copy: "A focused digital experience that connects a contemporary brand, its products, and the people who love them.",
+    title: "ไลฟ์สไตล์แบรนด์ร่วมสมัย",
+    copy: "ประสบการณ์ดิจิทัลที่เชื่อมแบรนด์ร่วมสมัย สินค้า และผู้คนที่รักในสิ่งเดียวกันอย่างเป็นธรรมชาติ",
     image: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/d55bfe247075879.69d358c4a9138.jpg",
   },
   {
-    title: "Health Clinic Experience",
-    copy: "A reassuring website that makes services, appointments, and the first step toward care easy to understand.",
+    title: "ประสบการณ์คลินิกสุขภาพ",
+    copy: "เว็บไซต์ที่ช่วยให้การค้นหาบริการ นัดหมาย และเริ่มต้นดูแลสุขภาพเป็นเรื่องเข้าใจง่ายและมั่นใจได้",
     image: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/22e949168231879.6436d91bd2c5a.jpeg",
   },
   {
-    title: "Community Creative Hub",
-    copy: "A digital hub for events, stories, and the people creating meaningful work within a local community.",
+    title: "ศูนย์สร้างสรรค์ของชุมชน",
+    copy: "พื้นที่ดิจิทัลสำหรับกิจกรรม เรื่องราว และผู้คนที่ร่วมสร้างผลงานมีความหมายให้กับชุมชน",
     image: "https://images.squarespace-cdn.com/content/v1/67a34593af3515009ca7b7ec/2165c978-c6ad-4f55-8ba5-5f393765a2cd/Exhibitions.png",
   },
   {
-    title: "Home Goods Store",
-    copy: "An e-commerce experience that helps customers discover products and make considered decisions with ease.",
+    title: "แพลตฟอร์มบริการธุรกิจ",
+    copy: "ระบบดิจิทัลที่รวบรวมข้อมูล งานบริการ และการสื่อสารกับลูกค้าไว้ในที่เดียว เพื่อให้ทีมทำงานได้คล่องตัวขึ้น",
     image: "https://cdn.dribbble.com/userupload/3343075/file/original-628a33369f7bad395b08c5a1b4b30979.png?resize=1200x&vertical=center",
   },
   {
-    title: "Service Management System",
-    copy: "A clear workspace that helps service teams manage work, data, and customer communication in one place.",
-    image: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/d55bfe247075879.69d358c4a9138.jpg",
-  },
-  {
-    title: "Art Collection Archive",
-    copy: "An exhibition-led platform that gives each artwork the context and space it needs to be discovered.",
-    image: "https://images.squarespace-cdn.com/content/v1/67a34593af3515009ca7b7ec/2165c978-c6ad-4f55-8ba5-5f393765a2cd/Exhibitions.png",
+    title: "ระบบจัดการธุรกิจครบวงจร",
+    copy: "พื้นที่ทำงานดิจิทัลที่เชื่อมข้อมูล ลูกค้า และบริการเข้าด้วยกัน เพื่อให้ทุกทีมตัดสินใจและทำงานได้รวดเร็วยิ่งขึ้น",
+    image: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/22e949168231879.6436d91bd2c5a.jpeg",
   },
 ] as const;
 
-const featuredPreviewProjects = [...projects, projects[0]];
+const featuredPreviewProjects = [...projects, projects[0], projects[1]];
 
 export function OurWorkSection() {
   return (

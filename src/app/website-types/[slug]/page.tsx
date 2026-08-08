@@ -1,9 +1,32 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Header } from "@/components/Header";
 import { websiteTypes } from "@/lib/website-types";
 
 type PageProps = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const type = websiteTypes.find((item) => item.slug === slug);
+
+  return {
+    title: type?.title ? "รับทำ" + type.title : "บริการออกแบบและพัฒนาเว็บไซต์",
+    description: type
+      ? "WieldTech รับออกแบบและพัฒนา" + type.title + " " + type.description + " พร้อมวางโครงสร้างให้ตอบโจทย์การใช้งานและเป้าหมายธุรกิจ"
+      : "รายละเอียดบริการออกแบบและพัฒนาเว็บไซต์ ระบบเว็บแอปพลิเคชัน และแพลตฟอร์มดิจิทัลจาก WieldTech",
+    alternates: { canonical: "/website-types/" + slug },
+    openGraph: {
+      url: "/website-types/" + slug,
+      title: type
+        ? "WieldTech - รับทำ" + type.title
+        : "WieldTech - บริการออกแบบและพัฒนาเว็บไซต์",
+      description: type
+        ? type.description + " โดยทีมออกแบบและพัฒนาเว็บไซต์ WieldTech"
+        : "บริการออกแบบและพัฒนาเว็บไซต์จาก WieldTech",
+    },
+  };
+}
 
 export default async function WebsiteTypePage({ params }: PageProps) {
   const { slug } = await params;
