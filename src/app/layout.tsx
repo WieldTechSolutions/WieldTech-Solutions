@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
-import "@fontsource-variable/inter";
-import "@fontsource/kanit/400.css";
-import "@fontsource/kanit/500.css";
-import "@fontsource/kanit/700.css";
+import localFont from "next/font/local";
 
 import { Footer } from "@/components/Footer";
 
 import "./globals.css";
+
+const inter = localFont({
+  src: "./fonts/inter-latin-variable.woff2",
+  variable: "--font-inter",
+  display: "swap",
+  preload: true,
+  fallback: ["Arial", "sans-serif"],
+});
+
+const kanit = localFont({
+  src: [
+    { path: "./fonts/kanit-thai-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/kanit-thai-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/kanit-thai-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-kanit",
+  display: "swap",
+  preload: true,
+  fallback: ["Tahoma", "sans-serif"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://wieldtech.dev"),
@@ -57,7 +74,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="th" className="h-full">
+    <html lang="th" className={`${inter.variable} ${kanit.variable} h-full`}>
       <body className="min-h-full">
         {children}
         <Footer />
