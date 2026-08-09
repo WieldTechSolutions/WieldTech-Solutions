@@ -39,7 +39,8 @@ body::after {
   content: "";
   position: fixed;
   z-index: 10;
-  top: 0;
+  /* Keep the navbar free from the fixed striped rails. */
+  top: 62px;
   bottom: 0;
   width: var(--rail-width);
   pointer-events: none;
@@ -63,11 +64,12 @@ a {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 20;
   height: 62px;
-  padding: 0 182px;
+  padding: 0 var(--rail-width);
   border-bottom: 1px solid var(--line);
-  background: #282a36ed;
+  /* Keep the navigation bar opaque so the fixed side rail cannot show through it. */
+  background: var(--dracula-background);
   display: flex;
   align-items: center;
   backdrop-filter: blur(12px);
