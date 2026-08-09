@@ -4,6 +4,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import type { MouseEvent } from "react";
 
+import { projectConsultationEnabled } from "@/lib/feature-flags";
+
 const links = [
   { label: "หน้าแรก", href: "/" },
   { label: "ผลงาน", href: "/work" },
@@ -49,8 +51,12 @@ export function Header() {
         ))}
       </nav>
       <div className="header-actions">
-        <a className="header-consult-link" href="/consult">ปรึกษาเรา</a>
-        <span className="header-actions-divider" aria-hidden="true">หรือ</span>
+        {projectConsultationEnabled ? (
+          <>
+            <a className="header-consult-link" href="/consult">ปรึกษาเรา</a>
+            <span className="header-actions-divider" aria-hidden="true">หรือ</span>
+          </>
+        ) : null}
         <a
           className="header-fastwork-link"
           href="https://fastwork.co/"

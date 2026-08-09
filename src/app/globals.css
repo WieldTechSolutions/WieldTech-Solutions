@@ -176,7 +176,7 @@ nav a:nth-child(5):hover { color: var(--dracula-orange); }
 }
 .consult-page {
   min-height: calc(100vh - 62px);
-  padding-bottom: 96px;
+  padding-bottom: 0;
 }
 .consult-page h1:not(.work-page-title) {
   max-width: 900px;
@@ -195,7 +195,10 @@ nav a:nth-child(5):hover { color: var(--dracula-orange); }
 }
 .consultation-form {
   display: grid;
+  width: min(760px, 100%);
   max-width: 760px;
+  margin-inline: auto;
+  margin-top: 24px;
   gap: 20px;
 }
 .consultation-form label {
@@ -205,11 +208,34 @@ nav a:nth-child(5):hover { color: var(--dracula-orange); }
   font-size: 15px;
   font-weight: 500;
 }
+.consultation-field-control {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.consultation-field-control::before,
+.consultation-field-control::after {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  /* Extend each field guide all the way to the browser edges. */
+  width: 100vw;
+  height: 1px;
+  content: "";
+  background: var(--line);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.consultation-field-control::before { top: 0; }
+.consultation-field-control::after { bottom: 0; }
 .consultation-form input,
 .consultation-form textarea {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 0;
   outline: 0;
   background: rgb(33 34 44 / 78%);
   color: var(--dracula-foreground);
@@ -227,7 +253,6 @@ nav a:nth-child(5):hover { color: var(--dracula-orange); }
   background: var(--panel);
 }
 .consultation-form button {
-  justify-self: start;
   min-height: 54px;
   padding: 12px 30px;
   border: 1px solid var(--dracula-foreground);
@@ -239,6 +264,35 @@ nav a:nth-child(5):hover { color: var(--dracula-orange); }
   font-weight: 600;
   cursor: pointer;
   transition: background-color 180ms ease, border-color 180ms ease;
+}
+.consultation-action {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding-block: 20px;
+}
+.consultation-action::before,
+.consultation-action::after {
+  position: absolute;
+  left: 50%;
+  width: 100vw;
+  height: 1px;
+  content: "";
+  background: var(--line);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.consultation-action::before { top: 0; }
+.consultation-action::after { bottom: 0; }
+.consultation-action button { position: relative; z-index: 1; }
+.consultation-dot-panel {
+  height: 216px;
+  margin: 0 -8px;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(98 114 164 / 42%) 1px, transparent 1.2px);
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 12px 12px;
 }
 .consultation-form button:hover {
   border-color: var(--dracula-green);

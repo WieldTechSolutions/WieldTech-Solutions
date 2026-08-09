@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { projectConsultationEnabled } from "@/lib/feature-flags";
+
 export function ContactSection() {
   return (
     <section id="approach" className="content-section work-section contact-section">
@@ -14,8 +16,12 @@ export function ContactSection() {
       </p>
       <div id="contact" className="contact-panel">
         <div className="contact-actions">
-          <a href="mailto:hello@wieldtech.dev">เริ่มโปรเจกต์</a>
-          <span aria-hidden="true">หรือ</span>
+          {projectConsultationEnabled ? (
+            <>
+              <a href="/consult">เริ่มโปรเจกต์</a>
+              <span aria-hidden="true">หรือ</span>
+            </>
+          ) : null}
           <a
             className="fastwork-link"
             href="https://fastwork.co/"
