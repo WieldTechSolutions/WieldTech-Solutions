@@ -55,7 +55,7 @@ export default function ApproachPage() {
       <Header />
       <article className="approach-page">
         <header className="website-types-section portfolio-page approach-hero" aria-labelledby="approach-page-title">
-          <small className="website-types-side-label">OUR APPROACH</small>
+          <small className="section-side-label">OUR APPROACH</small>
           <h1 id="approach-page-title" className="work-page-title">แนวทางทำงาน</h1>
           <p className="website-types-description">
             ทุกโปรเจกต์มีบริบทต่างกัน เราจึงทำงานร่วมกับคุณเป็นลำดับขั้น

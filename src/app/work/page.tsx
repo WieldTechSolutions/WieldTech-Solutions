@@ -24,7 +24,7 @@ export default function WorkPage() {
       <Header />
       <section className="website-types-section portfolio-page" aria-labelledby="portfolio-page-title">
         <h1 id="portfolio-page-title" className="work-page-title">ผลงานของเรา</h1>
-        <small className="website-types-side-label">OUR WORK</small>
+        <small className="section-side-label">OUR WORK</small>
         <p className="website-types-description text-base text-white">
           รวมโปรเจกต์ที่เราร่วมออกแบบและพัฒนา เพื่อเปลี่ยนโจทย์ทางธุรกิจให้กลายเป็นประสบการณ์ดิจิทัลที่มีความหมาย
         </p>

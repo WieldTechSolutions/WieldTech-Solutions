@@ -9,6 +9,7 @@ type Project = {
   title: string;
   copy: string;
   image: string;
+  slug: string;
 };
 
 type ProjectMeta = {
@@ -48,9 +49,11 @@ export function WorkPortfolioGrid({ projects }: { projects: readonly Project[] }
       projects.map((project, projectIndex) => {
         const itemNumber = collectionIndex * projects.length + projectIndex + 1;
 
-        return collectionIndex === 0
-          ? project
-          : { ...project, title: `${project.title} — โครงการ ${itemNumber}` };
+        return {
+          ...project,
+          slug: project.slug,
+          ...(collectionIndex === 0 ? {} : { title: `${project.title} — โครงการ ${itemNumber}` }),
+        };
       }),
     ).flat(),
     [projects],
@@ -199,7 +202,7 @@ function WorkProjectCard({ project, showBookmark }: { project: Project; showBook
     <div className="ios-window-cell">
       <a
         className="ios-window"
-        href="/consult"
+        href={`/work/${project.slug}`}
       >
         <div className="ios-window-bar" aria-hidden="true"><span /><span /><span /></div>
         <div className="ios-window-content">

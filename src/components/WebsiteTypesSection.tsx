@@ -45,7 +45,7 @@ export function WebsiteTypesSection() {
   return (
     <section className="website-types-section" aria-labelledby="website-types-title">
       <h2 id="website-types-title" className="text-4xl text-white tracking-tighter text-balance">คุณต้องการเว็บแบบไหน?</h2>
-      <small className="website-types-side-label">WEBSITE TYPES</small>
+      <small className="section-side-label">WEBSITE TYPES</small>
       <p className="website-types-description text-base text-white">
         ไม่ว่าจะเป็นเว็บไซต์องค์กร ร้านค้าออนไลน์ หรือแพลตฟอร์มดิจิทัล เราช่วยออกแบบและพัฒนาให้ตอบโจทย์ธุรกิจของคุณอย่างชัดเจน
       </p>

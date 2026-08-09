@@ -22,7 +22,7 @@ export default function AboutPage() {
       <Header />
       <article className="about-page">
         <header className="website-types-section portfolio-page about-hero" aria-labelledby="about-page-title">
-          <small className="website-types-side-label">ABOUT WIELDTECH</small>
+          <small className="section-side-label">ABOUT WIELDTECH</small>
           <h1 id="about-page-title" className="work-page-title">เกี่ยวกับเรา</h1>
           <p className="website-types-description">
             WieldTech คือสตูดิโอดิจิทัลที่ผสานกลยุทธ์ การออกแบบ และเทคโนโลยี

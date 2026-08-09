@@ -34,30 +34,20 @@ const projects = [
 ];
 
 export function WorkSection() {
-  const featuredProjects = [
-    portfolioProjects[4],
-    portfolioProjects[1],
-    portfolioProjects[8],
-    portfolioProjects[3],
-    portfolioProjects[6],
-    portfolioProjects[10],
-    portfolioProjects[0],
-    portfolioProjects[5],
-    portfolioProjects[9],
-    portfolioProjects[2],
-    portfolioProjects[7],
-    portfolioProjects[11],
-  ];
+  const featuredIndexes = [4, 1, 8, 3, 6, 10, 0, 5, 9, 2, 7, 11] as const;
+  const featuredProjects = featuredIndexes.map((index) => ({
+    ...portfolioProjects[index],
+  }));
   const projectRows = [featuredProjects.slice(0, 6), featuredProjects.slice(6, 12)];
 
   const renderRow = (
-    row: ReadonlyArray<{ title: string; copy: string; image: string }>,
+    row: ReadonlyArray<{ title: string; copy: string; image: string; slug: string }>,
     isDuplicate = false,
   ) => (
     <div className="website-types-grid work-ios-grid work-ios-grid--sliding" aria-hidden={isDuplicate || undefined}>
-      {row.map(({ title, copy, image }) => (
+      {row.map(({ title, copy, image, slug }) => (
         <div className="ios-window-cell" key={title}>
-          <a className="ios-window" href="#contact" tabIndex={isDuplicate ? -1 : undefined}>
+          <a className="ios-window" href={`/work/${slug}`} tabIndex={isDuplicate ? -1 : undefined}>
             <div className="ios-window-bar" aria-hidden="true">
               <span />
               <span />

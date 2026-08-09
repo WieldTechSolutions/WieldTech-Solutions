@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { CSSProperties } from "react";
 
 import { Header } from "@/components/Header";
 import { ContactSection } from "@/components/ContactSection";
@@ -96,17 +97,27 @@ export default async function WebsiteTypePage({ params }: PageProps) {
 
   const benefits = typeBenefits[type.slug];
   const icons = typeBenefitIcons[type.slug];
-  const categoryProjects = typeWorkIndexes[type.slug].map((index) => portfolioProjects[index]);
-  const previewProjects = categoryProjects.slice(0, 2);
+  const categoryWorkIndexes = typeWorkIndexes[type.slug] as readonly number[];
+  const categoryProjects = categoryWorkIndexes.map((index) => portfolioProjects[index]);
+  const previewProjects = [
+    ...categoryProjects,
+    ...portfolioProjects.filter((_, index) => !categoryWorkIndexes.includes(index)),
+  ].slice(0, 10);
+  const previewGroups = Array.from(
+    { length: Math.ceil(previewProjects.length / 2) },
+    (_, index) => previewProjects.slice(index * 2, index * 2 + 2),
+  );
+  const previewSlides = [previewGroups.at(-1)!, ...previewGroups, previewGroups[0]];
 
   return (
     <main>
       <Header />
       <article className="website-types-section portfolio-page website-detail-page">
         <h1 className="work-page-title">{type.title}</h1>
-        <small className="website-types-side-label">WEBSITE TYPE</small>
+        <small className="section-side-label">WEBSITE TYPE</small>
         <p className="website-types-description text-base text-white">{type.description}</p>
         <section className="website-detail-section">
+          <small className="section-side-label">BUSINESS VALUE</small>
           <h2>ระบบนี้ช่วยธุรกิจคุณยังไง</h2>
           <p className="website-detail-section-description">
             เราออกแบบ {type.title} ให้เป้าหมายทางธุรกิจชัดเจนขึ้น ลดขั้นตอนที่ไม่จำเป็น และเปลี่ยนผู้เข้าชมให้กลายเป็นโอกาสใหม่ของธุรกิจคุณ
@@ -128,14 +139,15 @@ export default async function WebsiteTypePage({ params }: PageProps) {
           </ul>
         </section>
         <section className="website-detail-section website-detail-section--spaced">
+          <small className="section-side-label">CASE STUDIES</small>
           <h2>ผลงานจริงในหมวด{type.category}</h2>
           <p className="website-detail-section-description">
             คัดสรรผลงานที่สะท้อนแนวคิดการออกแบบและการพัฒนาสำหรับ {type.category} เพื่อให้เห็นประสบการณ์ใช้งานจริงอย่างชัดเจน
           </p>
           <div className="website-detail-work website-types-grid work-ios-grid">
-            {categoryProjects.map((project) => (
+            {categoryProjects.map((project, index) => (
               <div className="ios-window-cell" key={project.title}>
-                <a className="ios-window" href="/work">
+                <a className="ios-window" href={`/work/${project.slug}`}>
                   <div className="ios-window-bar" aria-hidden="true"><span /><span /><span /></div>
                   <div className="ios-window-content">
                     <div className="work-card-heading"><h3>{project.title}</h3></div>
@@ -158,19 +170,23 @@ export default async function WebsiteTypePage({ params }: PageProps) {
           </div>
         </section>
         <section className="website-detail-section website-detail-section--spaced">
+          <small className="section-side-label">WEBSITE PREVIEWS</small>
           <h2>เว็บของคุณจะหน้าตาแบบนี้</h2>
           <p className="website-detail-section-description">
             ตัวอย่างแนวทางการจัดวางเนื้อหาและองค์ประกอบสำคัญ ที่ออกแบบให้สอดคล้องกับเป้าหมายของ {type.title}
           </p>
           <div className="website-preview-slider" aria-label="ตัวอย่างหน้าเว็บไซต์">
-            <div className="website-preview-slider-track">
-              {Array.from({ length: 6 }, (_, slideIndex) => {
-                const isDuplicate = slideIndex > 0;
+            <div
+              className="website-preview-slider-track"
+              style={{ "--preview-track-count": previewSlides.length } as CSSProperties}
+            >
+              {previewSlides.map((projects, slideIndex) => {
+                const isDuplicate = slideIndex === 0 || slideIndex === previewSlides.length - 1;
 
                 return (
                 <div className="website-preview-slider-group" aria-hidden={isDuplicate || undefined} key={slideIndex}>
-                  {previewProjects.map((project) => (
-                    <div className="website-preview-card ios-window ios-window--preview-only" key={`${project.title}-${isDuplicate ? "copy" : "main"}`}>
+                  {projects.map((project) => (
+                    <div className="website-preview-card ios-window ios-window--preview-only" key={`${project.title}-${slideIndex}`}>
                       <div className="ios-window-bar" aria-hidden="true"><span /><span /><span /></div>
                       <div className="ios-window-content">
                         <div className="work-card-media-frame">
@@ -186,7 +202,7 @@ export default async function WebsiteTypePage({ params }: PageProps) {
               })}
             </div>
           </div>
-          <WebsitePreviewPagination />
+          <WebsitePreviewPagination pageCount={previewGroups.length} />
         </section>
       </article>
       <ContactSection />

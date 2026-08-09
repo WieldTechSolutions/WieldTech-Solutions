@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { projects } from "@/components/OurWorkSection";
 import { websiteTypes } from "@/lib/website-types";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -42,6 +43,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...projects.map((project) => ({
+      url: `https://wieldtech.dev/work/${encodeURIComponent(project.slug)}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }

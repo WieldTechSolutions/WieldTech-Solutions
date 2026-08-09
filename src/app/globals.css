@@ -365,24 +365,11 @@ nav a:nth-child(5):hover { color: var(--dracula-orange); }
 .work-page-title {
   letter-spacing: 0.025em;
 }
-.website-types-side-label {
-  position: absolute;
-  top: 82px;
-  left: calc(-1 * (var(--rail-width) + 28px));
-  margin: 0;
-  color: var(--dracula-pink);
-  font-family: "Inter Variable", sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  line-height: 1;
-  white-space: nowrap;
-  writing-mode: vertical-rl;
-  transform: translateY(-50%) rotate(180deg);
-}
 .section-side-label {
   position: absolute;
-  top: 82px;
+  /* Keep the vertical rail label aligned with the visual center of its title,
+     instead of depending on a fixed position within each section. */
+  top: calc(var(--section-title-inset, 10px) + 1.125rem);
   left: calc(-1 * (var(--rail-width) + 28px));
   z-index: 2;
   margin: 0;
@@ -1167,6 +1154,7 @@ nav a:nth-child(5):hover { color: var(--dracula-orange); }
   margin-top: 12px;
   overflow: hidden;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
 }
 .our-work-section .work-ios-grid {
@@ -1941,8 +1929,14 @@ footer small span {
 }
 .website-detail-section {
   position: relative;
+  --section-title-inset: 24px;
   padding: 24px 0;
   border-top: 0;
+}
+.website-detail-section > .section-side-label {
+  /* Detail pages begin 8px inside the shared content rail. Compensate for
+     that inset so this label sits on the same vertical axis as Home's rail. */
+  left: calc(-1 * (var(--rail-width) + 36px));
 }
 .website-detail-section::before {
   content: "";
@@ -1983,6 +1977,26 @@ footer small span {
   left: -8px;
   width: calc(100% + 16px);
   height: 120px;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(98 114 164 / 42%) 1px, transparent 1.2px);
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 12px 12px;
+}
+.website-detail-section--highlights,
+.website-detail-section--suitability {
+  margin-top: 60px;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+.website-detail-section--highlights::after,
+.website-detail-section--suitability::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: 60px;
   pointer-events: none;
   background-image: radial-gradient(circle, rgb(98 114 164 / 42%) 1px, transparent 1.2px);
   background-attachment: fixed;
@@ -2073,6 +2087,37 @@ footer small span {
   height: 64px;
   margin-bottom: 19px;
 }
+.project-benefit-list b {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 19px;
+  color: var(--dracula-cyan);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+.project-benefit-list b::before,
+.project-benefit-list b::after {
+  display: inline-block;
+  color: currentColor;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  line-height: 1;
+}
+.project-benefit-list b::before {
+  content: "[";
+  margin-right: 0.38em;
+}
+.project-benefit-list b::after {
+  content: "]";
+  margin-left: 0.38em;
+}
+.project-benefit-list li:hover b { color: #000; }
 .website-benefit-list i img {
   display: block;
   width: 64px;
@@ -2103,6 +2148,7 @@ footer small span {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
 }
 .website-detail-work.website-types-grid {
@@ -2115,6 +2161,16 @@ footer small span {
     linear-gradient(var(--line), var(--line)) calc(33.333% + 2.667px + var(--grid-line-gap) / 3) 0 / 1px 100% no-repeat,
     linear-gradient(var(--line), var(--line)) calc(66.666% - 2.667px - var(--grid-line-gap) / 3) 0 / 1px 100% no-repeat,
     linear-gradient(var(--line), var(--line)) calc(66.666% - 2.667px + var(--grid-line-gap) * 2 / 3) 0 / 1px 100% no-repeat;
+}
+.project-detail-feature.website-types-grid {
+  grid-template-columns: minmax(0, 1fr);
+  background: none;
+}
+.project-detail-feature .ios-window-cell {
+  grid-column: 1;
+}
+.project-detail-feature .ios-window {
+  cursor: default;
 }
 .website-detail-work.website-types-grid::after {
   left: calc(-1 * (var(--content-gutter) + 8px) + 24px);
@@ -2129,13 +2185,14 @@ footer small span {
 }
 .website-preview-slider-track {
   display: flex;
-  width: 600%;
+  width: calc(var(--preview-track-count) * 100%);
+  transform: translateX(calc(-100% / var(--preview-track-count)));
   transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 .website-preview-slider-group {
   display: grid;
-  flex: 0 0 calc(100% / 6);
+  flex: 0 0 calc(100% / var(--preview-track-count));
   box-sizing: border-box;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
@@ -2244,6 +2301,46 @@ footer small span {
   color: var(--dracula-background);
 }
 .website-preview-pagination-arrow svg { display: block; }
+.project-preview-live-actions {
+  position: relative;
+  display: flex;
+  min-height: 112px;
+  margin-inline: -16px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  background: var(--dracula-background);
+}
+.project-preview-live-actions::after {
+  position: absolute;
+  right: calc(-1 * (var(--content-gutter) + 8px));
+  bottom: 0;
+  left: calc(-1 * (var(--content-gutter) + 8px));
+  height: 1px;
+  content: "";
+  background: var(--line);
+}
+.project-preview-live-link {
+  display: inline-flex;
+  min-height: 68px;
+  align-items: center;
+  padding: 16px 46px;
+  border: 1px solid var(--dracula-foreground);
+  border-radius: 999px;
+  background: var(--dracula-foreground);
+  color: var(--dracula-background);
+  font-family: "Kanit", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+.project-preview-live-link:hover {
+  border-color: var(--dracula-green);
+  background: var(--dracula-green);
+  color: var(--dracula-background);
+}
 @media (prefers-reduced-motion: reduce) {
   .website-preview-slider-track { transition: none; }
 }
@@ -2488,7 +2585,7 @@ footer small span {
     padding: 86px 8px 52px;
   }
   .hero-side-label { display: none; }
-  .website-types-side-label { display: none; }
+  .website-detail-section > .section-side-label { display: none; }
   .website-types-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     background:
