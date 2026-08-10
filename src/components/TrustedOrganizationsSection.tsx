@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const organizationSlots = Array.from({ length: 8 }, (_, index) => index + 1);
 
 export function TrustedOrganizationsSection() {
@@ -15,11 +17,10 @@ export function TrustedOrganizationsSection() {
       <div className="trusted-organizations-grid" aria-label="พื้นที่แสดงโลโก้องค์กร">
         {organizationSlots.map((slot) => (
           <div className="trusted-organization" key={slot}>
-            <Image alt="WieldTech" src="/brand/trusted-organization-logo.png" width={180} height={48} draggable={false} />
+            <Image alt="WieldTech" src="/brand/trusted-organization-logo.png" width={180} height={68} draggable={false} />
           </div>
         ))}
       </div>
     </section>
   );
 }
-import Image from "next/image";

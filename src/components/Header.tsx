@@ -18,7 +18,10 @@ const links = [
 export function Header() {
   const pathname = usePathname();
 
-  function scrollToSection(event: MouseEvent<HTMLAnchorElement>, targetId: string) {
+  function scrollToSection(
+    event: MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) {
     event.preventDefault();
     sessionStorage.setItem("wieldtech-scroll-target", targetId);
 
@@ -37,14 +40,24 @@ export function Header() {
   return (
     <header className="site-header">
       <a className="brand-logo" href="/" aria-label="WieldTech home">
-        <Image src="/brand/wieldtech-navbar.png" alt="WieldTech" width={160} height={37} priority />
+        <Image
+          src="/brand/wieldtech-navbar.png"
+          alt="WieldTech"
+          width={160}
+          height={37}
+          priority
+        />
       </a>
       <nav aria-label="เมนูหลัก">
         {links.map((link) => (
           <a
             href={link.href}
             key={link.label}
-            onClick={link.targetId ? (event) => scrollToSection(event, link.targetId) : undefined}
+            onClick={
+              link.targetId
+                ? (event) => scrollToSection(event, link.targetId)
+                : undefined
+            }
           >
             {link.label}
           </a>
@@ -53,8 +66,12 @@ export function Header() {
       <div className="header-actions">
         {projectConsultationEnabled ? (
           <>
-            <a className="header-consult-link" href="/consult">ปรึกษาเรา</a>
-            <span className="header-actions-divider" aria-hidden="true">หรือ</span>
+            <a className="header-consult-link" href="/consult">
+              ปรึกษาเรา
+            </a>
+            <span className="header-actions-divider" aria-hidden="true">
+              หรือ
+            </span>
           </>
         ) : null}
         <a
