@@ -33,7 +33,7 @@ export function Footer() {
     <footer id="about">
       <div>
         <a className="brand" href="/" aria-label="WieldTech home">
-          <Image src="/brand/wieldtech-navbar.png" alt="WieldTech" width={160} height={38} />
+          <Image src="/brand/wieldtech-navbar.png" alt="WieldTech" width={160} height={37} />
         </a>
         <p>เราออกแบบและพัฒนา<br />ประสบการณ์ดิจิทัลที่มีความหมาย</p>
       </div>
@@ -53,11 +53,11 @@ export function Footer() {
       </div>
       <div>
         <label>Studio</label>
-        <p>สุพรรณบุรี, ประเทศไทย<br /><a href="mailto:hello@wieldtech.dev">hello@wieldtech.dev</a></p>
+        <p>สุพรรณบุรี, ประเทศไทย</p>
       </div>
       <div>
         <label>Follow</label>
-        <p><a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a><br /><a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a><br /><a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a></p>
+        <p><a href="https://www.facebook.com/wieldtechsolutions" target="_blank" rel="noreferrer">Facebook</a></p>
       </div>
       <small>
         <span>© {currentYear} WieldTech. สงวนลิขสิทธิ์</span>
