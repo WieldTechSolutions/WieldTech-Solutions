@@ -64,6 +64,7 @@ export default function ApproachPage() {
         </header>
 
         <section className="approach-intro">
+          <small className="section-side-label">OUR APPROACH</small>
           <h2>กระบวนการที่ชัดเจน แต่ยืดหยุ่นตามความต้องการ</h2>
           <p>
             เราเปิดพื้นที่ให้การตัดสินใจเกิดขึ้นจากข้อมูลและการสื่อสารที่ตรงไปตรงมา
@@ -81,11 +82,6 @@ export default function ApproachPage() {
           ))}
         </section>
 
-        <section className="approach-closing">
-          <p>READY TO START</p>
-          <h2>เริ่มจากการคุยกัน แล้วสร้างสิ่งที่เหมาะกับธุรกิจของคุณ</h2>
-          <a href="/consult">ปรึกษาเรา</a>
-        </section>
       </article>
       <ContactSection />
     </main>

@@ -37,7 +37,7 @@ export function Header() {
   return (
     <header className="site-header">
       <a className="brand-logo" href="/" aria-label="WieldTech home">
-        <Image src="/brand/wieldtech-navbar.png" alt="WieldTech" width={160} height={38} priority />
+        <Image src="/brand/wieldtech-navbar.png" alt="WieldTech" width={160} height={37} priority />
       </a>
       <nav aria-label="เมนูหลัก">
         {links.map((link) => (
@@ -59,7 +59,7 @@ export function Header() {
         ) : null}
         <a
           className="header-fastwork-link"
-          href="https://fastwork.co/"
+          href="https://fastwork.co/byob/SDynRRABLa?openExternalBrowser=1&source=byob"
           target="_blank"
           rel="noreferrer"
         >

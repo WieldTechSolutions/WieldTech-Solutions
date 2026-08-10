@@ -24,7 +24,7 @@ export function ContactSection() {
           ) : null}
           <a
             className="fastwork-link"
-            href="https://fastwork.co/"
+            href="https://fastwork.co/byob/SDynRRABLa?openExternalBrowser=1&source=byob"
             target="_blank"
             rel="noreferrer"
           >
