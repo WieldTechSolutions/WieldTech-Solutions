@@ -44,9 +44,9 @@ function WebsiteTypeCard({ index }: { index: number }) {
 export function WebsiteTypesSection() {
   return (
     <section className="website-types-section" aria-labelledby="website-types-title">
-      <h2 id="website-types-title" className="text-4xl text-white tracking-tighter text-balance">คุณต้องการเว็บแบบไหน?</h2>
+      <h2 id="website-types-title" className="website-types-heading">คุณต้องการเว็บแบบไหน?</h2>
       <small className="section-side-label">WEBSITE TYPES</small>
-      <p className="website-types-description text-base text-white">
+      <p className="website-types-description">
         ไม่ว่าจะเป็นเว็บไซต์องค์กร ร้านค้าออนไลน์ หรือแพลตฟอร์มดิจิทัล เราช่วยออกแบบและพัฒนาให้ตอบโจทย์ธุรกิจของคุณอย่างชัดเจน
       </p>
       <div className="website-types-grid">

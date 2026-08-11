@@ -43,8 +43,9 @@ export function WorkSection() {
   const renderRow = (
     row: ReadonlyArray<{ title: string; copy: string; image: string; slug: string }>,
     isDuplicate = false,
+    layout: "desktop" | "tablet" = "desktop",
   ) => (
-    <div className="website-types-grid work-ios-grid work-ios-grid--sliding" aria-hidden={isDuplicate || undefined}>
+    <div className={`website-types-grid work-ios-grid work-ios-grid--sliding featured-work-grid--${layout}`} aria-hidden={isDuplicate || undefined}>
       {row.map(({ title, copy, image, slug }) => (
         <div className="ios-window-cell" key={title}>
           <a className="ios-window" href={`/work/${slug}`} tabIndex={isDuplicate ? -1 : undefined}>
@@ -78,7 +79,7 @@ export function WorkSection() {
   return (
     <section id="work" className="content-section work-section">
       <div className="work-section-header">
-        <h2 id="work-title" className="work-section-title text-4xl text-white tracking-tighter text-balance">
+        <h2 id="work-title" className="work-section-title">
           ผลงานที่แนะนำ
         </h2>
         <small className="section-side-label">FEATURED WORK</small>
@@ -95,12 +96,18 @@ export function WorkSection() {
                   {renderRow(row.slice(0, 3))}
                   {renderRow(row.slice(3, 6))}
                   {renderRow(row.slice(0, 3), true)}
+                  {renderRow(row.slice(0, 2), false, "tablet")}
+                  {renderRow(row.slice(2, 4), false, "tablet")}
+                  {renderRow(row.slice(4, 6), true, "tablet")}
                 </>
               ) : (
                 <>
                   {renderRow(row.slice(3, 6))}
                   {renderRow(row.slice(0, 3))}
                   {renderRow(row.slice(3, 6), true)}
+                  {renderRow(row.slice(4, 6), false, "tablet")}
+                  {renderRow(row.slice(2, 4), false, "tablet")}
+                  {renderRow(row.slice(0, 2), true, "tablet")}
                 </>
               )}
             </div>

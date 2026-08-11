@@ -53,7 +53,7 @@ export function TechnologySection() {
   return (
     <section id="technology" className="content-section work-section technology-section" aria-labelledby="technology-title">
       <div className="work-section-header">
-        <h2 id="technology-title" className="work-section-title text-4xl text-white tracking-tighter text-balance">
+        <h2 id="technology-title" className="work-section-title">
           เทคโนโลยีและเฟรมเวิร์ก
         </h2>
         <small className="section-side-label">TECH STACK</small>
@@ -73,6 +73,11 @@ export function TechnologySection() {
           );
         })}
         <article className="technology-grid-spacer" aria-hidden="true" />
+        <article className="technology-grid-spacer technology-grid-spacer--tablet" aria-hidden="true" />
+        <article className="technology-grid-spacer technology-grid-spacer--tablet" aria-hidden="true" />
+        <span className="technology-grid-row-divider technology-grid-row-divider--one" aria-hidden="true" />
+        <span className="technology-grid-row-divider technology-grid-row-divider--two" aria-hidden="true" />
+        <span className="technology-grid-row-divider technology-grid-row-divider--three" aria-hidden="true" />
       </div>
     </section>
   );

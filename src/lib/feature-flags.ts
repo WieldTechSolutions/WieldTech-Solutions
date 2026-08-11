@@ -1,2 +1,2 @@
-/** Keep unfinished public features hidden without removing their implementation. */
+/** Enable the project consultation page and its navigation actions. */
 export const projectConsultationEnabled = false;

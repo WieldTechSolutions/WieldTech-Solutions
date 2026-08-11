@@ -74,8 +74,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="th" className={`${inter.variable} ${kanit.variable} h-full`}>
-      <body className="min-h-full">
+    <html lang="th" className={`${inter.variable} ${kanit.variable}`}>
+      <body>
         {children}
         <Footer />
       </body>

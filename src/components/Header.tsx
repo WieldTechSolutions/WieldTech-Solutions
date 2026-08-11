@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import type { MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 
-import { projectConsultationEnabled } from "@/lib/feature-flags";
+import { MenuIcon, type MenuIconHandle } from "@/components/ui/menu";
 
 const links = [
   { label: "หน้าแรก", href: "/" },
@@ -17,6 +17,24 @@ const links = [
 
 export function Header() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
+  const menuIconRef = useRef<MenuIconHandle>(null);
+
+  useEffect(() => {
+    document.body.classList.toggle("mobile-menu-open", menuOpen);
+
+    return () => document.body.classList.remove("mobile-menu-open");
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (menuOpen && !menuClosing) {
+      menuIconRef.current?.startAnimation();
+      return;
+    }
+
+    menuIconRef.current?.stopAnimation();
+  }, [menuClosing, menuOpen]);
 
   function scrollToSection(
     event: MouseEvent<HTMLAnchorElement>,
@@ -37,8 +55,28 @@ export function Header() {
     window.location.assign("/");
   }
 
+  function closeMenu() {
+    if (!menuOpen || menuClosing) return;
+
+    setMenuClosing(true);
+    window.setTimeout(() => {
+      setMenuOpen(false);
+      setMenuClosing(false);
+    }, 280);
+  }
+
+  function toggleMenu() {
+    if (menuOpen) {
+      closeMenu();
+      return;
+    }
+
+    setMenuClosing(false);
+    setMenuOpen(true);
+  }
+
   return (
-    <header className="site-header">
+    <header className={`site-header${menuOpen ? " is-menu-open" : ""}${menuClosing ? " is-menu-closing" : ""}`}>
       <a className="brand-logo" href="/" aria-label="WieldTech home">
         <Image
           src="/brand/wieldtech-navbar.png"
@@ -55,25 +93,27 @@ export function Header() {
             key={link.label}
             onClick={
               link.targetId
-                ? (event) => scrollToSection(event, link.targetId)
-                : undefined
+                ? (event) => {
+                    scrollToSection(event, link.targetId);
+                    closeMenu();
+                  }
+                : closeMenu
             }
           >
             {link.label}
           </a>
         ))}
       </nav>
+      <button
+        className="header-menu-toggle"
+        type="button"
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
+        aria-expanded={menuOpen && !menuClosing}
+        onClick={toggleMenu}
+      >
+        <MenuIcon ref={menuIconRef} size={34} aria-hidden="true" />
+      </button>
       <div className="header-actions">
-        {projectConsultationEnabled ? (
-          <>
-            <a className="header-consult-link" href="/consult">
-              ปรึกษาเรา
-            </a>
-            <span className="header-actions-divider" aria-hidden="true">
-              หรือ
-            </span>
-          </>
-        ) : null}
         <a
           className="header-fastwork-link"
           href="https://fastwork.co/byob/SDynRRABLa?openExternalBrowser=1&source=byob"
@@ -84,6 +124,13 @@ export function Header() {
           ติดต่อบน Fastwork
         </a>
       </div>
+      <Image
+        className="mobile-menu-tab"
+        src="/brand/wieldtech-tab.png"
+        alt=""
+        width={48}
+        height={48}
+      />
     </header>
   );
 }

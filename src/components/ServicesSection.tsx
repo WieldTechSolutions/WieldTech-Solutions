@@ -32,7 +32,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="content-section work-section services-section" aria-labelledby="services-title">
       <div className="work-section-header">
-        <h2 id="services-title" className="work-section-title text-4xl text-white tracking-tighter text-balance">
+        <h2 id="services-title" className="work-section-title">
           บริการของเรา
         </h2>
         <small className="section-side-label">SERVICES</small>

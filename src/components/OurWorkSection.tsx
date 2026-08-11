@@ -79,7 +79,7 @@ export function OurWorkSection() {
   return (
     <section id="our-work" className="content-section work-section our-work-section" aria-labelledby="our-work-title">
       <div className="work-section-header">
-        <h2 id="our-work-title" className="work-section-title text-4xl text-white tracking-tighter text-balance">
+        <h2 id="our-work-title" className="work-section-title">
           ผลงานของเรา
         </h2>
         <small className="section-side-label">OUR WORK</small>

@@ -126,7 +126,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       <article className="website-types-section portfolio-page website-detail-page project-detail-page">
         <h1 className="work-page-title">{project.title}</h1>
         <small className="section-side-label">PROJECT DETAIL</small>
-        <p className="website-types-description text-base text-white">{project.copy}</p>
+        <p className="website-types-description">{project.copy}</p>
 
         <section className="website-detail-section">
           <small className="section-side-label">PROJECT PREVIEW</small>

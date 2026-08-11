@@ -115,7 +115,7 @@ export default async function WebsiteTypePage({ params }: PageProps) {
       <article className="website-types-section portfolio-page website-detail-page">
         <h1 className="work-page-title">{type.title}</h1>
         <small className="section-side-label">WEBSITE TYPE</small>
-        <p className="website-types-description text-base text-white">{type.description}</p>
+        <p className="website-types-description">{type.description}</p>
         <section className="website-detail-section">
           <small className="section-side-label">BUSINESS VALUE</small>
           <h2>ระบบนี้ช่วยธุรกิจคุณยังไง</h2>

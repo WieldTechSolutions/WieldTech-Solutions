@@ -38,7 +38,7 @@ export function Footer() {
         <p>เราออกแบบและพัฒนา<br />ประสบการณ์ดิจิทัลที่มีความหมาย</p>
       </div>
       <div>
-        <label>Navigate</label>
+        <h2>Navigate</h2>
         <p className="footer-navigation">
           {navigationLinks.map((link) => (
             <a
@@ -52,11 +52,11 @@ export function Footer() {
         </p>
       </div>
       <div>
-        <label>Studio</label>
+        <h2>Studio</h2>
         <p>สุพรรณบุรี, ประเทศไทย</p>
       </div>
       <div>
-        <label>Follow</label>
+        <h2>Follow</h2>
         <p><a href="https://www.facebook.com/wieldtechsolutions" target="_blank" rel="noreferrer">Facebook</a></p>
       </div>
       <small>

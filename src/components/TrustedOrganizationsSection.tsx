@@ -6,7 +6,7 @@ export function TrustedOrganizationsSection() {
   return (
     <section className="content-section work-section trusted-organizations-section" aria-labelledby="trusted-organizations-title">
       <div className="work-section-header">
-        <h2 id="trusted-organizations-title" className="work-section-title text-4xl text-white tracking-tighter text-balance">
+        <h2 id="trusted-organizations-title" className="work-section-title">
           องค์กรที่ไว้วางใจเรา
         </h2>
         <small className="section-side-label">TRUSTED BY</small>
