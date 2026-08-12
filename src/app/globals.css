@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 :root {
   --dracula-background: #20212b;
   --dracula-current-line: #44475a;
@@ -25,6 +23,24 @@
 * {
   box-sizing: border-box;
 }
+html,
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+img,
+svg {
+  display: block;
+}
 html {
   height: 100%;
   background: var(--bg);
@@ -32,6 +48,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
+  position: relative;
   min-height: 100%;
   margin: 0;
   overflow-x: clip;
@@ -42,8 +59,12 @@ body {
 body::before,
 body::after {
   content: "";
-  position: fixed;
-  z-index: 10;
+  /* Follow the document height instead of ending at the mobile browser's
+     visual viewport, so each rail continues alongside all page content. */
+  position: absolute;
+  /* Keep rails behind the page layer: the header is rendered inside main, so
+     a higher rail layer would otherwise cover it regardless of its z-index. */
+  z-index: 1;
   /* Keep the navbar free from the fixed striped rails. */
   top: 62px;
   bottom: 0;
@@ -3794,11 +3815,14 @@ footer small span {
     --rail-width: 24px;
     --content-gutter: calc(var(--rail-offset) + var(--rail-width) + 8px);
   }
+  footer .footer-line-mark {
+    width: min(65vw, 280px);
+  }
   body::before,
   body::after {
-    /* Rails are a foreground framing layer on phones, including over
-       pagination separators and other full-bleed grid lines. */
-    z-index: 3;
+    /* Keep the phone rails below main as well, so they cannot overlap its
+       fixed/sticky navigation. */
+    z-index: 1;
     width: var(--rail-width);
   }
   body::before { left: var(--rail-offset); }
@@ -4547,11 +4571,35 @@ footer small span {
     overflow: hidden;
     touch-action: none;
   }
-  /* The opened menu has an opaque full-screen layer.  Raise the fixed rails
-     above that layer (but they still start below the header) so they remain
-     visible at both sides of the menu. */
+  /* Reuse the page's actual rails over the opened menu.  The header controls
+     sit above them, while the menu panels sit below them. */
   body.mobile-menu-open::before,
-  body.mobile-menu-open::after { z-index: 21; }
+  body.mobile-menu-open::after {
+    position: fixed;
+    top: 62px;
+    bottom: 0;
+    z-index: 1001;
+  }
+  body.mobile-menu-open main { z-index: auto; }
+  body.mobile-menu-open main::before {
+    content: "";
+    position: fixed;
+    top: 62px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    background: var(--dracula-background);
+    pointer-events: none;
+  }
+  body.mobile-menu-open .site-header {
+    /* A fixed header is its own stacking context, so lift the whole menu
+       above the backdrop while the page rails remain one layer higher. */
+    z-index: 1000;
+  }
+  body.mobile-menu-open .site-header::before,
+  body.mobile-menu-open .brand-logo,
+  body.mobile-menu-open .header-menu-toggle { z-index: 1002; }
   /* The header lives inside each route's main element.  Keep it viewport-bound
      on mobile so it does not get clipped when that main element ends above the footer. */
   main {
@@ -4628,7 +4676,9 @@ footer small span {
     padding: 0 var(--content-gutter) 78px;
     border-top: 0;
     border-bottom: 0;
+    isolation: isolate;
     background: var(--dracula-background);
+    z-index: 1000;
     transform: none;
     animation: mobile-menu-reveal 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
@@ -4637,6 +4687,7 @@ footer small span {
   }
   .site-header.is-menu-open nav a {
     position: relative;
+    z-index: 1;
     padding: 12px 0;
     border-bottom: 0;
     font-size: 0.9375rem;
@@ -4645,10 +4696,10 @@ footer small span {
   .site-header.is-menu-open nav a::after {
     content: "";
     position: absolute;
-    right: auto;
+    right: calc(-1 * var(--content-gutter));
     bottom: 0;
     left: calc(-1 * var(--content-gutter));
-    width: 100vw;
+    width: auto;
     height: 1px;
     background: var(--line);
     pointer-events: none;
@@ -4663,7 +4714,8 @@ footer small span {
     width: 100%;
     justify-content: center;
     padding: 12px var(--content-gutter) 16px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 0;
+    z-index: 1000;
     background: var(--dracula-background);
     animation: mobile-menu-action-reveal 360ms 40ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
@@ -4677,7 +4729,7 @@ footer small span {
     position: fixed;
     bottom: 16px;
     left: 50%;
-    z-index: 22;
+    z-index: 1001;
     width: 100px;
     height: 100px;
     object-fit: contain;
@@ -4738,7 +4790,9 @@ footer small span {
     bottom: auto;
     translate: 0 -50%;
     padding: 15px var(--content-gutter);
-    border-top: 1px solid var(--line);
+    /* The seam pseudo-element supplies this boundary; a second border here
+       would render the same line twice. */
+    border-top: 0;
     border-bottom: 0;
   }
   .site-header.is-menu-open .header-actions::before {
@@ -4747,11 +4801,12 @@ footer small span {
     content: "";
     position: absolute;
     top: calc(-1 * var(--mobile-menu-seam-height));
-    /* Fill only the central gap; side rails keep their own striped surface. */
+    /* Stop at the inner edges of both side rails. */
     right: calc(var(--rail-offset) + var(--rail-width));
     left: calc(var(--rail-offset) + var(--rail-width));
     height: var(--mobile-menu-seam-height);
-    border-block: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
     background-color: rgb(33 34 44 / 38%);
     background-image: repeating-linear-gradient(
       135deg,
@@ -4761,6 +4816,16 @@ footer small span {
     /* Match the side-rail stripe phase exactly at both intersections. */
     background-attachment: fixed;
     background-position: 0 0;
+    pointer-events: none;
+  }
+  .site-header.is-menu-open .header-actions::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: var(--line);
     pointer-events: none;
   }
 }
