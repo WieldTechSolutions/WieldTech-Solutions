@@ -56,6 +56,17 @@ body {
   color: var(--dracula-comment);
   font-family: var(--font-kanit), var(--font-inter), sans-serif;
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 body::before,
 body::after {
   content: "";
@@ -2351,28 +2362,51 @@ footer small span {
   display: grid;
   place-items: center;
   box-sizing: border-box;
+  width: calc(100% + 32px);
   height: 58px;
   min-height: 0;
   margin-inline: -16px;
   background: var(--dracula-background);
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  /* The full-width pseudo-element provides the lower separator. */
+  border-bottom: 0;
+  border-inline: 0;
   transform: none;
 }
-.website-preview-pagination::before,
 .website-preview-pagination::after {
-  position: absolute;
-  top: -1px;
-  width: calc(var(--content-gutter) + 8px);
-  height: calc(100% + 2px);
   content: "";
-  background: inherit;
+  position: absolute;
+  top: 0;
+  left: calc(-1 * (var(--content-gutter) - 8px));
+  right: calc(-1 * (var(--content-gutter) - 8px));
+  /* Keep the rail continuation above the opaque pagination background. */
+  z-index: 2;
+  width: auto;
+  height: 100%;
+  /* Match the border-box coordinates of body::before/::after inner borders. */
+  background:
+    linear-gradient(var(--line), var(--line)) calc(var(--rail-offset) + var(--rail-width) - 1px) 0 / 1px 100% no-repeat,
+    linear-gradient(var(--line), var(--line)) calc(100% - var(--rail-offset) - var(--rail-width)) 0 / 1px 100% no-repeat;
+  pointer-events: none;
+}
+.website-preview-pagination::before {
+  content: "";
+  position: absolute;
+  /* The pagination begins at the inner rail edge. Extend the pair of
+     separators to the outer website edges without redrawing either rail. */
+  top: -1px;
+  bottom: -1px;
+  left: calc(-1 * (var(--content-gutter) - 8px));
+  right: calc(-1 * (var(--content-gutter) - 8px));
+  z-index: 1;
+  width: auto;
+  height: auto;
   border-block: 1px solid var(--line);
   pointer-events: none;
 }
-.website-preview-pagination::before { right: 100%; }
-.website-preview-pagination::after { left: 100%; }
 .website-preview-pagination-controls {
+  position: relative;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -2406,6 +2440,7 @@ footer small span {
 .website-preview-pagination-arrow svg { display: block; }
 .project-preview-live-actions {
   position: relative;
+  isolation: isolate;
   display: flex;
   min-height: 112px;
   margin-inline: -16px;
@@ -2413,6 +2448,20 @@ footer small span {
   justify-content: center;
   padding: 16px 0;
   background: var(--dracula-background);
+}
+.project-preview-live-actions::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(-1 * (var(--content-gutter) - 8px));
+  right: calc(-1 * (var(--content-gutter) - 8px));
+  z-index: 0;
+  height: 100%;
+  /* These are the same inner-border coordinates used by the global rails. */
+  background:
+    linear-gradient(var(--line), var(--line)) calc(var(--rail-offset) + var(--rail-width) - 1px) 0 / 1px 100% no-repeat,
+    linear-gradient(var(--line), var(--line)) calc(100% - var(--rail-offset) - var(--rail-width)) 0 / 1px 100% no-repeat;
+  pointer-events: none;
 }
 .project-preview-live-actions::after {
   position: absolute;
@@ -2424,6 +2473,8 @@ footer small span {
   background: var(--line);
 }
 .project-preview-live-link {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   min-height: 68px;
   align-items: center;
@@ -4376,6 +4427,66 @@ footer small span {
     min-height: 213px;
     height: 213px;
   }
+}
+
+/* Use the same compact card treatment across the MacBook Air and Pro canvases. */
+@media (min-width: 1200px) and (max-width: 1800px) {
+  :root {
+    --rail-offset: calc(7vw / 2);
+    --content-gutter: calc(var(--rail-offset) + var(--rail-width) + 8px);
+  }
+  .technology-grid h3 { font-size: 0.75rem; }
+  .technology-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .work-ios-grid .work-card-bookmark {
+    top: -18px;
+    right: 14px;
+    width: 56px;
+    height: 76px;
+  }
+  .work-ios-grid .work-card-bookmark-star {
+    width: 24px;
+    height: 24px;
+  }
+  .website-types-section > .website-types-grid .ios-window-content > span:not(.ios-window-detail) {
+    display: -webkit-box;
+    max-width: calc(100% - 84px);
+    min-height: calc(2 * 1.55em);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  .website-types-section > .website-types-grid .ios-window-icon {
+    width: 72px;
+    height: 72px;
+    right: 22px;
+    bottom: 16px;
+  }
+  .website-types-section > .website-types-grid .ios-window-icon > svg {
+    width: 100%;
+    height: 100%;
+  }
+  .approach-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .approach-steps article:nth-child(n) { border-right: 1px solid var(--line); }
+  .approach-steps article:nth-child(3n) { border-right: 0; }
+  /* The second row already owns its top border. Use one full-width grid rule
+     instead of adding a second, short border to the first row. */
+  .approach-steps article:nth-child(-n + 3) { border-bottom: 0; }
+  .approach-steps::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(-1 * (var(--content-gutter) - 8px));
+    right: calc(-1 * (var(--content-gutter) - 8px));
+    z-index: 2;
+    height: 1px;
+    background: var(--line);
+    pointer-events: none;
+  }
+  footer .footer-line-mark { width: 80vw; }
 }
 
 /* Keep the iPad Air technology cards compact while retaining the four-column grid. */
