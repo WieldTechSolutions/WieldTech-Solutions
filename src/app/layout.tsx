@@ -9,7 +9,7 @@ const inter = localFont({
   src: "./fonts/inter-latin-variable.woff2",
   variable: "--font-inter",
   display: "swap",
-  preload: false,
+  preload: true,
   fallback: ["Arial", "sans-serif"],
 });
 
@@ -21,7 +21,7 @@ const kanit = localFont({
   ],
   variable: "--font-kanit",
   display: "swap",
-  preload: false,
+  preload: true,
   fallback: ["Tahoma", "sans-serif"],
 });
 
