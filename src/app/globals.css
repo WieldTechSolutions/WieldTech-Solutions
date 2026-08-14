@@ -4489,6 +4489,19 @@ footer small span {
   footer .footer-line-mark { width: 80vw; }
 }
 
+/* The 1728px MacBook Pro 16 canvas has room for larger Tech Stack marks. */
+@media (min-width: 1600px) and (max-width: 1800px) {
+  .technology-grid h3 { font-size: 0.875rem; }
+  .technology-icon {
+    width: 64px;
+    height: 64px;
+  }
+  .website-types-section > .website-types-grid .ios-window-icon {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 /* Keep the iPad Air technology cards compact while retaining the four-column grid. */
 @media (min-width: 701px) and (max-width: 900px) {
   .technology-grid { grid-auto-rows: 166px; }
