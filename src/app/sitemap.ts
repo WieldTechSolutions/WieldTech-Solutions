@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/components/OurWorkSection";
-import { websiteTypes } from "@/lib/website-types";
+import { projects } from "@/data/projects";
+import { websiteTypes } from "@/data/website-types";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = [

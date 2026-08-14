@@ -1,4 +1,4 @@
-import { projects as portfolioProjects } from "@/components/OurWorkSection";
+import { projects as portfolioProjects } from "@/data/projects";
 
 const projects = [
   {

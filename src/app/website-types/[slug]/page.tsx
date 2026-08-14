@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 
-import { Header } from "@/components/Header";
-import { ContactSection } from "@/components/ContactSection";
-import { projects as portfolioProjects } from "@/components/OurWorkSection";
-import { WebsitePreviewPagination } from "@/components/WebsitePreviewSlider";
-import { websiteTypes } from "@/lib/website-types";
+import { ContactSection } from "@/components/contact/ContactSection";
+import { projects as portfolioProjects } from "@/data/projects";
+import { Header } from "@/components/layout/Header";
+import { WebsitePreviewPagination } from "@/components/website-types/WebsitePreviewPagination";
+import { websiteTypes } from "@/data/website-types";
 
 const typeBenefitIcons = {
   "corporate-website": ["briefcase-business", "dashboard", "presentation", "timeline"],

@@ -19,7 +19,6 @@ type ProjectMeta = {
 };
 
 const PROJECTS_PER_PAGE = 12;
-const PORTFOLIO_PAGE_COUNT = 11;
 const MAX_VISIBLE_PAGE_BUTTONS = 6;
 
 const projectMeta: ProjectMeta[] = [
@@ -44,20 +43,10 @@ export function WorkPortfolioGrid({ projects }: { projects: readonly Project[] }
   const [tag, setTag] = useState("ทั้งหมด");
   const [technology, setTechnology] = useState("ทั้งหมด");
 
-  const portfolioProjects = useMemo(
-    () => Array.from({ length: PORTFOLIO_PAGE_COUNT }, (_, collectionIndex) =>
-      projects.map((project, projectIndex) => {
-        const itemNumber = collectionIndex * projects.length + projectIndex + 1;
-
-        return {
-          ...project,
-          slug: project.slug,
-          ...(collectionIndex === 0 ? {} : { title: `${project.title} — โครงการ ${itemNumber}` }),
-        };
-      }),
-    ).flat(),
-    [projects],
-  );
+  // Render the source collection as-is. The data layer intentionally contains
+  // the complete 12-project portfolio, so pagination must not manufacture
+  // repeated projects to fill additional pages.
+  const portfolioProjects = projects;
 
   const projectMatches = useMemo(
     () => portfolioProjects.map((project, index) => {

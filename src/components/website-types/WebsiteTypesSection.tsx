@@ -8,7 +8,7 @@ import { GalleryThumbnailsIcon } from "@/components/ui/gallery-thumbnails";
 import { LayersIcon } from "@/components/ui/layers";
 import { MonitorCogIcon } from "@/components/ui/monitor-cog";
 import { RocketIcon } from "@/components/ui/rocket";
-import { websiteTypes } from "@/lib/website-types";
+import { websiteTypes } from "@/data/website-types";
 
 const icons = [BriefcaseBusinessIcon, RocketIcon, CartIcon, MonitorCogIcon, LayersIcon, GalleryThumbnailsIcon] as const;
 

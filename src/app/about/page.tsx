@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { Header } from "@/components/Header";
-import { ContactSection } from "@/components/ContactSection";
+import { ContactSection } from "@/components/contact/ContactSection";
+import { Header } from "@/components/layout/Header";
 
 const principles: Array<{
   number: string;

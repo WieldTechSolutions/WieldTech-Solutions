@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/components/Header";
-import { ContactSection } from "@/components/ContactSection";
-import { projects } from "@/components/OurWorkSection";
-import { WorkPortfolioGrid } from "@/components/WorkPortfolioGrid";
+import { ContactSection } from "@/components/contact/ContactSection";
+import { projects } from "@/data/projects";
+import { Header } from "@/components/layout/Header";
+import { WorkPortfolioGrid } from "@/components/work/WorkPortfolioGrid";
 
 export const metadata: Metadata = {
   title: "ผลงานออกแบบเว็บไซต์และเว็บแอปพลิเคชัน",

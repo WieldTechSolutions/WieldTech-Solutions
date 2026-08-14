@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import type { CSSProperties } from "react";
 
-import { ContactSection } from "@/components/ContactSection";
-import { Header } from "@/components/Header";
-import { projects } from "@/components/OurWorkSection";
-import { WebsitePreviewPagination } from "@/components/WebsitePreviewSlider";
+import { ContactSection } from "@/components/contact/ContactSection";
+import { projects } from "@/data/projects";
+import { Header } from "@/components/layout/Header";
+import { WebsitePreviewPagination } from "@/components/website-types/WebsitePreviewPagination";
 
 type PageProps = { params: Promise<{ slug: string }> };
 

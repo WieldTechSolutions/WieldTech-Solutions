@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { ConsultationForm } from "@/components/ConsultationForm";
-import { Header } from "@/components/Header";
+import { ConsultationForm } from "@/components/consultation/ConsultationForm";
+import { Header } from "@/components/layout/Header";
 import { projectConsultationEnabled } from "@/lib/feature-flags";
 
 export const metadata: Metadata = {

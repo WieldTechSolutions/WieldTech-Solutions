@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/components/Header";
-import { ContactSection } from "@/components/ContactSection";
+import { ContactSection } from "@/components/contact/ContactSection";
+import { Header } from "@/components/layout/Header";
 
 export const metadata: Metadata = {
   title: "แนวทางทำงาน | ออกแบบและพัฒนาเว็บไซต์",

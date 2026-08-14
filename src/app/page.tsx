@@ -1,14 +1,14 @@
-import { ContactSection } from "@/components/ContactSection";
-import { Header } from "@/components/Header";
-import { HeroSection } from "@/components/HeroSection";
-import { OurWorkSection } from "@/components/OurWorkSection";
-import { ServicesSection } from "@/components/ServicesSection";
-import { TechnologySection } from "@/components/TechnologySection";
-import { TrustedOrganizationsSection } from "@/components/TrustedOrganizationsSection";
-import { WorkSection } from "@/components/WorkSection";
-import { SeoJsonLd } from "@/components/SeoJsonLd";
-import { ScrollToSection } from "@/components/ScrollToSection";
-import { WebsiteTypesSection } from "@/components/WebsiteTypesSection";
+import { ContactSection } from "@/components/contact/ContactSection";
+import { HeroSection } from "@/components/home/HeroSection";
+import { OurWorkSection } from "@/components/home/OurWorkSection";
+import { ServicesSection } from "@/components/home/ServicesSection";
+import { TechnologySection } from "@/components/home/TechnologySection";
+import { TrustedOrganizationsSection } from "@/components/home/TrustedOrganizationsSection";
+import { WorkSection } from "@/components/home/WorkSection";
+import { Header } from "@/components/layout/Header";
+import { ScrollToSection } from "@/components/shared/ScrollToSection";
+import { SeoJsonLd } from "@/components/shared/SeoJsonLd";
+import { WebsiteTypesSection } from "@/components/website-types/WebsiteTypesSection";
 
 export default function Home() {
   return (
