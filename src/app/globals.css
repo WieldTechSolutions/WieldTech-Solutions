@@ -56,6 +56,24 @@ body {
   color: var(--dracula-comment);
   font-family: var(--font-kanit), var(--font-inter), sans-serif;
 }
+
+/* The site is presented as an interactive portfolio, not selectable document
+   content. Prevent browser text/image dragging globally, while preserving
+   normal text editing inside form controls. */
+body,
+body * {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+
+input,
+textarea,
+select {
+  user-select: text;
+  -webkit-user-select: text;
+}
 .sr-only {
   position: absolute;
   width: 1px;
