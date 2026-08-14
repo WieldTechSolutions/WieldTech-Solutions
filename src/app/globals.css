@@ -4500,6 +4500,16 @@ footer small span {
     width: 100px;
     height: 100px;
   }
+  .work-ios-grid .work-card-bookmark {
+    top: -24px;
+    right: 18px;
+    width: 72px;
+    height: 96px;
+  }
+  .work-ios-grid .work-card-bookmark-star {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 /* Keep the iPad Air technology cards compact while retaining the four-column grid. */
